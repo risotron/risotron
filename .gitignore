@@ -1,0 +1,11 @@
+# Skynet workspace artifacts
+.skynet/workspace/
+.skynet/logs/
+.skynet/wiki/
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
