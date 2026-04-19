@@ -1,0 +1,12 @@
+# Skynet project manifest
+# To add new fields run: /skynet-migrate
+
+version: 3
+agentInteraction: message
+projectName: risotron
+pmBackend: github
+wikiBackend: github-wiki
+wikiConfig:
+  repo: risotron/risotron
+  url: https://github.com/risotron/risotron/wiki
+  submodulePath: .skynet/wiki
