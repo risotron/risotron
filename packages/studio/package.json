@@ -1,0 +1,14 @@
+{
+  "name": "@risotron/studio",
+  "version": "0.1.0",
+  "private": false,
+  "bin": {
+    "risotron": "./bin/risotron.mjs"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@risotron/runtime": "workspace:*"
+  }
+}

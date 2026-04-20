@@ -8,3 +8,17 @@
 !.env.example
 *.pem
 *.key
+
+# Node
+node_modules/
+dist/
+out/
+coverage/
+.DS_Store
+*.log
+*.tsbuildinfo
+
+# Electron artifacts
+release/
+*.dmg
+*.zip
