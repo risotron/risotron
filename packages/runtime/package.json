@@ -5,13 +5,26 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js",
-    "./preload": "./dist/preload.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./preload": {
+      "types": "./dist/preload.d.ts",
+      "default": "./dist/preload.js"
+    }
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json"
+    "build": "tsc -p tsconfig.json",
+    "test": "node --test test/unit/*.test.js",
+    "smoke": "pnpm run build && electron test/smoke/main.js",
+    "smoke:auto": "pnpm run build && SMOKE_AUTO=1 electron test/smoke/main.js"
   },
+  "dependencies": {},
   "peerDependencies": {
     "electron": ">=28"
+  },
+  "devDependencies": {
+    "electron": "^41.2.1"
   }
 }

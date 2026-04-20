@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Risotron Runtime Smoke Test</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        padding: 1.5rem;
+        color: #222;
+      }
+      h1 { font-size: 1.25rem; margin-top: 0; }
+      section { margin-bottom: 1.25rem; }
+      button { padding: 0.4rem 0.8rem; margin-right: 0.5rem; }
+      pre {
+        background: #f4f4f4;
+        padding: 0.6rem;
+        border-radius: 4px;
+        white-space: pre-wrap;
+        font-size: 0.85rem;
+      }
+      .ok { color: #0a7e07; }
+      .err { color: #b00020; }
+    </style>
+  </head>
+  <body>
+    <h1>Risotron Runtime — Smoke Test (brief-2)</h1>
+
+    <section>
+      <h2>AC-2.4: invoke('ping')</h2>
+      <button id="btn-ping">Run ping</button>
+      <pre id="out-ping">(not run)</pre>
+    </section>
+
+    <section>
+      <h2>AC-2.5: updates.check()</h2>
+      <button id="btn-check">Run updates.check()</button>
+      <pre id="out-check">(not run)</pre>
+    </section>
+
+    <section>
+      <h2>AC-2.6: updates.apply()</h2>
+      <button id="btn-apply">Run updates.apply()</button>
+      <pre id="out-apply">(not run)</pre>
+    </section>
+
+    <script>
+      const api = window.risotron;
+
+      function write(id, value, ok) {
+        const el = document.getElementById(id);
+        el.textContent = typeof value === 'string' ? value : JSON.stringify(value, null, 2);
+        el.className = ok ? 'ok' : 'err';
+      }
+
+      async function runPing() {
+        try {
+          const res = await api.invoke('ping');
+          const ok = res === 'pong';
+          write('out-ping', `got: ${res}`, ok);
+          return { ok, value: res };
+        } catch (err) {
+          write('out-ping', `error: ${err.message}`, false);
+          return { ok: false, error: err.message };
+        }
+      }
+
+      async function runCheck() {
+        try {
+          const res = await api.updates.check();
+          const ok = !!res && res.hasUpdate === false;
+          write('out-check', res, ok);
+          return { ok, value: res };
+        } catch (err) {
+          write('out-check', `error: ${err.message}`, false);
+          return { ok: false, error: err.message };
+        }
+      }
+
+      async function runApply() {
+        try {
+          await api.updates.apply();
+          write('out-apply', 'RESOLVED (unexpected — should reject)', false);
+          return { ok: false, error: 'resolved unexpectedly' };
+        } catch (err) {
+          const match = err && /not implemented yet/.test(err.message);
+          write('out-apply', `rejected: ${err.message}`, match);
+          return { ok: !!match, message: err.message };
+        }
+      }
+
+      document.getElementById('btn-ping').addEventListener('click', runPing);
+      document.getElementById('btn-check').addEventListener('click', runCheck);
+      document.getElementById('btn-apply').addEventListener('click', runApply);
+
+      // Invoked by main process when SMOKE_AUTO=1
+      window.__smokeRun = async () => {
+        const [ping, check, apply] = await Promise.all([runPing(), runCheck(), runApply()]);
+        api.send('smoke:report', { ping, check, apply });
+      };
+    </script>
+  </body>
+</html>
