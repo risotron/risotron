@@ -1,0 +1,17 @@
+{
+  "name": "@risotron/runtime",
+  "version": "0.1.0",
+  "private": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./preload": "./dist/preload.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "peerDependencies": {
+    "electron": ">=28"
+  }
+}
