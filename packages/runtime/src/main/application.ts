@@ -50,6 +50,16 @@ export class RisotronApplication {
   }
 
   onReady(cb: EventCallback): () => void {
+    if (this._isReady) {
+      try {
+        cb();
+      } catch (err) {
+        // Match _emit() behavior for late ready subscribers.
+        // eslint-disable-next-line no-console
+        console.error('[risotron] listener for "ready" threw:', err);
+      }
+      return () => {};
+    }
     return this._subscribe('ready', cb);
   }
 

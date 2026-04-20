@@ -102,3 +102,19 @@ describe('AC-2.3 unsubscribe semantics', () => {
     });
   }
 });
+
+describe('ready subscription replay', () => {
+  test('onReady(cb) invokes late subscribers immediately once run() has completed', async () => {
+    const app = createApplication({ name: 'X', version: '0.0.0' });
+
+    await app.run();
+
+    let count = 0;
+    const unsub = app.onReady(() => {
+      count += 1;
+    });
+
+    assert.equal(count, 1);
+    assert.equal(typeof unsub, 'function');
+  });
+});

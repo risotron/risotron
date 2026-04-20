@@ -1,12 +1,13 @@
 import { contextBridge, ipcRenderer } from 'electron';
 
+import type { Semver } from '../release/types.js';
+
 export interface IRisotronAPI {
   /**
-   * High-level auto-update namespace. Real wiring lands in brief-3; Phase 1 α
-   * delegates to IPC stubs that return `{ hasUpdate: false }` / reject.
+   * High-level auto-update namespace backed by main-process updater IPC.
    */
   readonly updates: {
-    check(): Promise<{ hasUpdate: boolean; latestVersion?: string; releaseNotes?: string }>;
+    check(): Promise<{ hasUpdate: boolean; latestVersion?: Semver; releaseNotes?: string }>;
     apply(): Promise<void>;
     onProgress(cb: (p: { percent: number; bytesPerSec: number }) => void): () => void;
   };

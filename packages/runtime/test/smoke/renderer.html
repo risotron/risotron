@@ -24,7 +24,7 @@
     </style>
   </head>
   <body>
-    <h1>Risotron Runtime — Smoke Test (brief-2)</h1>
+    <h1>Risotron Runtime — Smoke Test</h1>
 
     <section>
       <h2>AC-2.4: invoke('ping')</h2>
@@ -33,13 +33,13 @@
     </section>
 
     <section>
-      <h2>AC-2.5: updates.check()</h2>
+      <h2>AC-3.6: updates.check()</h2>
       <button id="btn-check">Run updates.check()</button>
       <pre id="out-check">(not run)</pre>
     </section>
 
     <section>
-      <h2>AC-2.6: updates.apply()</h2>
+      <h2>updates.apply()</h2>
       <button id="btn-apply">Run updates.apply()</button>
       <pre id="out-apply">(not run)</pre>
     </section>
@@ -68,7 +68,7 @@
       async function runCheck() {
         try {
           const res = await api.updates.check();
-          const ok = !!res && res.hasUpdate === false;
+          const ok = !!res && typeof res.hasUpdate === 'boolean' && typeof res.latestVersion === 'string';
           write('out-check', res, ok);
           return { ok, value: res };
         } catch (err) {
@@ -80,12 +80,11 @@
       async function runApply() {
         try {
           await api.updates.apply();
-          write('out-apply', 'RESOLVED (unexpected — should reject)', false);
-          return { ok: false, error: 'resolved unexpectedly' };
+          write('out-apply', 'staged update and requested install', true);
+          return { ok: true };
         } catch (err) {
-          const match = err && /not implemented yet/.test(err.message);
-          write('out-apply', `rejected: ${err.message}`, match);
-          return { ok: !!match, message: err.message };
+          write('out-apply', `error: ${err.message}`, false);
+          return { ok: false, message: err.message };
         }
       }
 
@@ -95,8 +94,8 @@
 
       // Invoked by main process when SMOKE_AUTO=1
       window.__smokeRun = async () => {
-        const [ping, check, apply] = await Promise.all([runPing(), runCheck(), runApply()]);
-        api.send('smoke:report', { ping, check, apply });
+        const [ping, check] = await Promise.all([runPing(), runCheck()]);
+        api.send('smoke:report', { ping, check });
       };
     </script>
   </body>
