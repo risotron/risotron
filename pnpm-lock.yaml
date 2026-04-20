@@ -25,9 +25,9 @@ importers:
         version: 5.9.3
 
   packages/runtime:
-    dependencies:
+    devDependencies:
       electron:
-        specifier: '>=28'
+        specifier: ^41.2.1
         version: 41.2.1
 
   packages/studio:

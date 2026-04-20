@@ -12,5 +12,5 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
-  ignorePatterns: ['dist/', 'out/', 'node_modules/'],
+  ignorePatterns: ['dist/', 'out/', 'node_modules/', 'packages/*/test/'],
 };
