@@ -1,5 +1,5 @@
 /**
- * Smoke-test harness for brief-2 AC-2.2..2.6.
+ * Smoke-test harness for runtime IPC and updater check wiring.
  *
  * Two modes:
  *   - Interactive (default): opens a window with manual buttons. Useful for
@@ -11,21 +11,21 @@
  * Verifies:
  *   - AC-2.2: onReady fires after app.whenReady()
  *   - AC-2.4: window.risotron.invoke('ping') -> 'pong'
- *   - AC-2.5: window.risotron.updates.check() -> { hasUpdate: false }
- *   - AC-2.6: window.risotron.updates.apply() rejects with "not implemented yet"
- *
- * Plain .js so electron can run it directly; TS compile is unnecessary for a
- * throwaway harness. Delete after brief-3 integrates the real updater.
+ *   - AC-3.6: window.risotron.updates.check() resolves to update state
  */
 const { ipcMain, app: electronApp } = require('electron');
 const path = require('node:path');
+const { autoUpdater } = require('electron-updater');
 const {
   createApplication,
   createBrowserWindow,
-  registerUpdaterIPC,
+  configureApplicationUpdater,
+  GithubReleaseProvider,
 } = require('../../dist/index.js');
 
 const AUTO = process.env.SMOKE_AUTO === '1';
+const GITHUB_OWNER = process.env.SMOKE_GITHUB_OWNER;
+const GITHUB_REPO = process.env.SMOKE_GITHUB_REPO;
 
 const app = createApplication({
   name: 'Risotron Smoke',
@@ -35,8 +35,26 @@ const app = createApplication({
 // AC-2.4: ping/pong handler
 ipcMain.handle('ping', () => 'pong');
 
-// AC-2.5 / AC-2.6: register stubbed update IPC
-registerUpdaterIPC(app);
+const provider =
+  GITHUB_OWNER && GITHUB_REPO
+    ? new GithubReleaseProvider({ repository: { owner: GITHUB_OWNER, name: GITHUB_REPO } })
+    : {
+        id: 'smoke',
+        publish: async () => ({ releaseUrl: 'https://example.invalid/releases/0.0.1' }),
+        getManifest: async () => ({
+          version: '0.0.1',
+          releaseDate: new Date('2026-04-20T00:00:00.000Z').toISOString(),
+          releaseNotes: 'Smoke release',
+          files: [],
+        }),
+        downloadUpdate: async (version) => ({ stagedPath: '/tmp/risotron-smoke.dmg', version }),
+      };
+
+if (GITHUB_OWNER && GITHUB_REPO) {
+  autoUpdater.forceDevUpdateConfig = true;
+}
+
+configureApplicationUpdater(app, provider);
 
 // AC-2.2 probe
 let readyFired = false;
@@ -79,15 +97,9 @@ if (AUTO) {
       pass = false;
     }
     if (report.check.ok) {
-      console.log('[smoke] AC-2.5 PASS updates.check() ->', JSON.stringify(report.check.value));
+      console.log('[smoke] AC-3.6 PASS updates.check() ->', JSON.stringify(report.check.value));
     } else {
-      console.error('[smoke] AC-2.5 FAIL updates.check() ->', report.check);
-      pass = false;
-    }
-    if (report.apply.ok) {
-      console.log('[smoke] AC-2.6 PASS updates.apply() rejected with:', report.apply.message);
-    } else {
-      console.error('[smoke] AC-2.6 FAIL updates.apply() ->', report.apply);
+      console.error('[smoke] AC-3.6 FAIL updates.check() ->', report.check);
       pass = false;
     }
     if (!readyFired) {
