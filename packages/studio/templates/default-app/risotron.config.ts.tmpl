@@ -1,0 +1,8 @@
+import type { RisotronConfig } from '@risotron/runtime';
+
+export default {
+  releaseProvider: '{{releaseProvider}}',
+  providerConfig: {
+    repository: { owner: '{{ghOwner}}', name: '{{appSlug}}-releases' },
+  },
+} satisfies RisotronConfig;
