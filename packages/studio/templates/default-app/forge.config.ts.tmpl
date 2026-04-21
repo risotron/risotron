@@ -1,0 +1,52 @@
+import type { ForgeConfig } from '@electron-forge/shared-types';
+
+const config: ForgeConfig = {
+  packagerConfig: {
+    osxSign: false,
+    osxNotarize: false,
+    asar: true,
+  },
+  makers: [
+    { name: '@electron-forge/maker-dmg', config: {} },
+    { name: '@electron-forge/maker-zip', config: { platforms: ['darwin'] } },
+  ],
+  plugins: [
+    {
+      name: '@electron-forge/plugin-vite',
+      config: {
+        build: [
+          { entry: 'src/main.ts', config: 'vite.main.config.ts' },
+          { entry: 'src/preload.ts', config: 'vite.preload.config.ts' },
+        ],
+        renderer: [{ name: 'main_window', config: 'vite.renderer.config.ts' }],
+      },
+    },
+  ],
+  publishers: [
+    {
+      name: '@electron-forge/publisher-github',
+      config: {
+        repository: { owner: '{{ghOwner}}', name: '{{appSlug}}-releases' },
+        prerelease: false,
+        draft: false,
+        authToken: process.env.GH_TOKEN,
+      },
+    },
+  ],
+  hooks: {
+    postPackage: async (_config, result) => {
+      const { execSync } = await import('node:child_process');
+      for (const outPath of result.outputPaths) {
+        const fs = await import('node:fs');
+        const entries = fs.readdirSync(outPath).filter((f) => f.endsWith('.app'));
+        for (const appName of entries) {
+          execSync(`codesign --force --deep --sign - "${outPath}/${appName}"`, {
+            stdio: 'inherit',
+          });
+        }
+      }
+    },
+  },
+};
+
+export default config;

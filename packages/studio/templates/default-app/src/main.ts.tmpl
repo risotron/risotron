@@ -1,0 +1,70 @@
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import { ipcMain } from 'electron';
+import {
+  BrowserWindow,
+  configureApplicationUpdater,
+  createApplication,
+  resolveProvider,
+} from '@risotron/runtime';
+
+import risotronConfig from '../risotron.config';
+import pkg from '../package.json';
+
+declare const MAIN_WINDOW_VITE_DEV_SERVER_URL: string | undefined;
+declare const MAIN_WINDOW_VITE_NAME: string;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = createApplication({
+  name: '{{appName}}',
+  version: pkg.version,
+});
+
+const provider = resolveProvider(
+  risotronConfig.releaseProvider,
+  risotronConfig.providerConfig,
+);
+
+configureApplicationUpdater(app, provider);
+
+// Escape hatch (Phase 1, per Q4-api (A)): expose the app version to the
+// renderer via a custom IPC channel. See spec §3.3.
+ipcMain.handle('app.getVersion', () => pkg.version);
+
+let mainWindow: Electron.BrowserWindow | null = null;
+
+app.onReady(() => {
+  mainWindow = new BrowserWindow({
+    width: 600,
+    height: 400,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true,
+      nodeIntegration: false,
+      sandbox: false,
+    },
+  });
+
+  if (typeof MAIN_WINDOW_VITE_DEV_SERVER_URL === 'string' && MAIN_WINDOW_VITE_DEV_SERVER_URL) {
+    void mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
+  } else {
+    void mainWindow.loadFile(
+      path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`),
+    );
+  }
+});
+
+app.onWindowAllClosed(() => {
+  if (process.platform !== 'darwin') app.quit();
+});
+
+app.onActivate(() => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    // Left blank for Phase 1: the initial window is created onReady above.
+  }
+});
+
+void app.run();

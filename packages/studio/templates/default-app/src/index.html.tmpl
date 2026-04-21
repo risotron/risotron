@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{appName}}</title>
+  </head>
+  <body>
+    <main>
+      <h1>{{appName}}</h1>
+      <p>Version: <span id="version">…</span></p>
+      <div class="actions">
+        <button id="check">Check for Updates</button>
+        <button id="update" disabled>Update</button>
+      </div>
+      <p id="status">Ready.</p>
+      <p id="progress"></p>
+    </main>
+    <script type="module" src="./renderer.ts"></script>
+  </body>
+</html>

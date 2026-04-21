@@ -1,5 +1,27 @@
 # {{appName}}
 
-Scaffolded by Risotron Studio.
+Scaffolded with [Risotron Studio](https://github.com/risotron/risotron).
 
-(Full README content lands in brief-8.)
+## Prerequisites (Machine A — dev)
+- Node 20+, corepack (`corepack enable`)
+- [gh CLI](https://cli.github.com/) authenticated: `gh auth login`
+
+## Install
+    pnpm install   # or npm install
+
+## Develop
+    pnpm start     # electron-forge start — live reload via Vite
+
+## Publish a new version
+1. `npm version patch|minor|major` — bumps version, commits, tags
+2. `risotron publish` — builds, ad-hoc signs, uploads DMG + zip to release repo
+
+## Install on another Mac (Machine B)
+1. Download the DMG from the release repo
+2. Open the DMG and drag `{{appName}}.app` to `/Applications`
+3. First launch is blocked by Gatekeeper. Run ONCE in Terminal:
+
+       xattr -dr com.apple.quarantine /Applications/{{appName}}.app
+
+4. Launch the app normally.
+5. Click **Check for Updates** → **Update** to pull subsequent versions.

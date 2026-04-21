@@ -3,9 +3,29 @@
   "productName": "{{appName}}",
   "version": "{{version}}",
   "author": "{{author}}",
-  "description": "App scaffolded by Risotron Studio (placeholder — full content from brief-8)",
+  "description": "{{appName}} — built with Risotron",
   "main": ".vite/build/main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "risotron publish"
+  },
   "dependencies": {
     "@risotron/runtime": "{{runtimeVersion}}"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.11.1",
+    "@electron-forge/maker-dmg": "^7.11.1",
+    "@electron-forge/maker-zip": "^7.11.1",
+    "@electron-forge/plugin-vite": "^7.11.1",
+    "@electron-forge/publisher-github": "^7.11.1",
+    "@electron-forge/shared-types": "^7.11.1",
+    "electron": "^41.2.1",
+    "typescript": "^5.9.0",
+    "vite": "^7.3.2"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["electron", "esbuild", "macos-alias", "fs-xattr"]
   }
 }
