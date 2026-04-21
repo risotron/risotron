@@ -31,13 +31,21 @@ The dev command starts TypeScript watch mode for all workspace packages.
 
 ## Publish
 
-Publishing is implemented in a later Phase 1 brief. For now, the planned command is:
+Run from a scaffolded App X root after committing or stashing local changes:
 
 ```sh
 risotron publish
 ```
 
+Use `--dry-run` to run preflight, package, and make without uploading artifacts:
+
+```sh
+risotron publish --dry-run
+```
+
+The publish command fetches a token with `gh auth token` and injects it only into the
+`electron-forge publish` child process as `GH_TOKEN`.
+
 ## Next
 
-Brief-2 fills in `@risotron/runtime`. Later briefs replace the Studio CLI stub with `risotron
-studio` and `risotron publish`.
+Later briefs complete the default App X template and E2E checklist.

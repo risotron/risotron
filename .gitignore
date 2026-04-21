@@ -19,6 +19,6 @@ coverage/
 *.tsbuildinfo
 
 # Electron artifacts
-release/
+/release/
 *.dmg
 *.zip

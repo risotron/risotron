@@ -9,8 +9,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json && vite build",
     "dev": "vite",
-    "start": "node ./dist/cli/studio.js",
-    "test": "node --test test/unit/scaffold.test.js test/unit/release-server.test.js"
+    "start": "node ./bin/risotron.mjs studio",
+    "test": "node --test test/unit/scaffold.test.js test/unit/release-server.test.js test/unit/publish.test.js"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.6",
@@ -27,6 +27,7 @@
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react": "^5.1.0",
+    "esbuild": "^0.25.11",
     "typescript": "^5.8.3",
     "vite": "^7.1.11"
   }

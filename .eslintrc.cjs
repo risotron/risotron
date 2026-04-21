@@ -12,5 +12,11 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
-  ignorePatterns: ['dist/', 'out/', 'node_modules/', 'packages/*/test/'],
+  ignorePatterns: [
+    'dist/',
+    'out/',
+    'node_modules/',
+    'packages/*/test/',
+    'packages/*/templates/',
+  ],
 };
