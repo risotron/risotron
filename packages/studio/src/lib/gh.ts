@@ -28,7 +28,7 @@ export async function createPrivateRepo(
   description?: string,
 ): Promise<{ url: string; sshUrl: string }> {
   const fullName = owner ? `${owner}/${name}` : name;
-  const args = ['repo', 'create', fullName, '--private', '--confirm'];
+  const args = ['repo', 'create', fullName, '--private'];
 
   if (description) {
     args.push('--description', description);

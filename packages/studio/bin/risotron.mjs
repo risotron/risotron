@@ -35,10 +35,16 @@ program
 
 program
   .command('publish')
-  .description('Publish an app release')
-  .action(async () => {
+  .description('Build and publish App X via electron-forge + ad-hoc sign')
+  .option('--dry-run', 'Run all preflights and build, but skip the actual publish upload')
+  .action(async (opts) => {
     const { runPublish } = await import('../dist/cli/publish.js');
-    await runPublish();
+    await runPublish(opts);
   });
 
-await program.parseAsync(process.argv);
+try {
+  await program.parseAsync(process.argv);
+} catch (err) {
+  console.error(err instanceof Error ? err.message : String(err));
+  process.exitCode = 1;
+}
