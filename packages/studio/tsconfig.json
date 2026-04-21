@@ -4,5 +4,10 @@
     "outDir": "dist",
     "rootDir": "src"
   },
-  "include": ["src/index.ts", "src/cli/**/*.ts", "src/server/**/*.ts", "src/lib/**/*.ts"]
+  "include": [
+    "src/index.ts",
+    "src/cli/**/*.ts",
+    "src/server/**/*.ts",
+    "src/lib/**/*.ts"
+  ]
 }

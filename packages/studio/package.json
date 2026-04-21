@@ -9,7 +9,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json && vite build",
     "dev": "vite",
-    "start": "node ./dist/cli/studio.js"
+    "start": "node ./dist/cli/studio.js",
+    "test": "node --test test/unit/scaffold.test.js"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.6",
@@ -19,7 +20,8 @@
     "open": "^10.2.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.9.4"
+    "react-router-dom": "^7.9.4",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/react": "^19.2.2",
