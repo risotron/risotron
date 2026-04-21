@@ -10,7 +10,7 @@
     "build": "tsc -p tsconfig.json && vite build",
     "dev": "vite",
     "start": "node ./dist/cli/studio.js",
-    "test": "node --test test/unit/scaffold.test.js"
+    "test": "node --test test/unit/scaffold.test.js test/unit/release-server.test.js"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.6",
