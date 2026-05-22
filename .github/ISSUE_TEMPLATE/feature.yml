@@ -1,0 +1,47 @@
+name: "⭐ Feature"
+description: "Create a new Feature — a distinct capability within an Epic"
+labels: ["type:feature"]
+body:
+  - type: input
+    id: epic-id
+    attributes:
+      label: "Epic ID"
+      description: "Which epic does this belong to? (e.g., 'user-authentication')"
+      placeholder: "user-authentication"
+    validations:
+      required: true
+  - type: input
+    id: feature-id
+    attributes:
+      label: "Feature ID"
+      description: "Unique slug for this feature (lowercase, hyphens)"
+      placeholder: "oauth-google"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "What does this feature do?"
+    validations:
+      required: true
+  - type: textarea
+    id: user-stories
+    attributes:
+      label: "User Stories"
+      description: "Break down into user stories"
+      value: |
+        - [ ] As a ..., I want ..., so that ...
+        - [ ] As a ..., I want ..., so that ...
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: "Acceptance Criteria"
+      value: |
+        - [ ] Criterion 1
+        - [ ] Criterion 2
+  - type: textarea
+    id: technical-notes
+    attributes:
+      label: "Technical Notes"
+      description: "Implementation approach, API design, etc."

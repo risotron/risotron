@@ -1,0 +1,60 @@
+# .manifest.yml — Source of truth for Antigravity agents
+version: "1.0"
+
+project:
+  name: "RisoTron"
+  repo: "https://github.com/RisoTron/RisoTron"
+  wiki: "https://github.com/RisoTron/RisoTron.wiki.git"
+  wiki_path: "wiki"
+  initialized_at: "2026-05-22"
+
+github_project:
+  number: 2
+  owner: "RisoTron"
+  board_url: "https://github.com/orgs/RisoTron/projects/2"
+
+backlog: []
+  # Ordered by priority — first item = next to develop
+  # - issue: 12
+  #   type: "us"
+  #   title: "[US] As a user, I want to ..."
+  #   epic: "epic-slug"
+  #   feature: "feat-slug"
+  #   status: "ready"  # backlog | ready | in-progress | review | done
+
+current_work: null
+  # issue: 12
+  # branch: "feat/epic-slug/short-desc"
+  # tasks: [20, 21, 22]
+
+epics: []
+  # - id: "auth"
+  #   title: "User Authentication"
+  #   issue: 10
+  #   status: "planned"  # planned | in-progress | done
+  #   features:
+  #     - id: "oauth-google"
+  #       title: "OAuth2 Google Login"
+  #       issue: 11
+  #       status: "planned"
+
+completed: []
+  # - issue: 5
+  #   title: "[US] As a user, I want to ..."
+  #   completed_at: "2026-05-22"
+  #   epic: "epic-slug"
+
+labels_created:
+  types:
+    - "type:epic"
+    - "type:feature"
+    - "type:us"
+    - "type:task"
+    - "type:bug"
+  priorities:
+    - "priority:critical"
+    - "priority:high"
+    - "priority:medium"
+    - "priority:low"
+  epics: []
+  features: []

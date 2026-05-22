@@ -1,0 +1,27 @@
+name: "✅ Task"
+description: "Create a new Task — a sub-unit of a User Story"
+labels: ["type:task"]
+body:
+  - type: input
+    id: us-number
+    attributes:
+      label: "Parent User Story #"
+      description: "Issue number of the parent User Story"
+      placeholder: "12"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: "Task Description"
+      description: "What needs to be done? Use action verb + object."
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: "Definition of Done"
+      value: |
+        - [ ] Implementation complete
+        - [ ] Tests written and passing
+        - [ ] Code reviewed

@@ -1,0 +1,54 @@
+name: "📖 User Story"
+description: "Create a new User Story — a deliverable unit of work"
+labels: ["type:us"]
+body:
+  - type: input
+    id: epic-id
+    attributes:
+      label: "Epic ID"
+      placeholder: "user-authentication"
+    validations:
+      required: true
+  - type: input
+    id: feature-id
+    attributes:
+      label: "Feature ID"
+      placeholder: "oauth-google"
+    validations:
+      required: true
+  - type: textarea
+    id: story
+    attributes:
+      label: "User Story"
+      description: "As a <persona>, I want <action>, so that <value>"
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: "Acceptance Criteria"
+      description: "Use Given/When/Then format"
+      value: |
+        **Given** ...
+        **When** ...
+        **Then** ...
+  - type: textarea
+    id: tasks
+    attributes:
+      label: "Tasks"
+      description: "Break down into implementation tasks (will become sub-issues)"
+      value: |
+        - [ ] Task 1
+        - [ ] Task 2
+        - [ ] Write tests
+  - type: dropdown
+    id: priority
+    attributes:
+      label: "Priority"
+      options:
+        - P0-Critical
+        - P1-High
+        - P2-Medium
+        - P3-Low
+    validations:
+      required: true

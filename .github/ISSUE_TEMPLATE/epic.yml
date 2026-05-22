@@ -1,0 +1,47 @@
+name: "🏔️ Epic"
+description: "Create a new Epic — a large body of work containing multiple features"
+labels: ["type:epic"]
+body:
+  - type: input
+    id: epic-id
+    attributes:
+      label: "Epic ID"
+      description: "Unique slug for this epic (lowercase, hyphens). Used in labels and branches."
+      placeholder: "user-authentication"
+    validations:
+      required: true
+  - type: textarea
+    id: overview
+    attributes:
+      label: "Overview"
+      description: "What is this epic about and why is it needed?"
+    validations:
+      required: true
+  - type: textarea
+    id: features
+    attributes:
+      label: "Features"
+      description: "List the features that make up this epic"
+      value: |
+        - [ ] Feature 1: Description
+        - [ ] Feature 2: Description
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: "Acceptance Criteria"
+      description: "How do we know this epic is complete?"
+      value: |
+        - [ ] All features implemented and tested
+        - [ ] Documentation updated
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: "Dependencies"
+      description: "External or internal dependencies"
+      value: |
+        None
+  - type: textarea
+    id: notes
+    attributes:
+      label: "Notes"
+      description: "Design decisions, trade-offs, references"
