@@ -65,6 +65,7 @@ class RisoTronTemplate extends BaseTemplate {
 
           // Copy RisoTron source structure
           // copyTemplateFile(dir, relativePath) copies tmpl/{relativePath} → {dir}/{relativePath}
+          await this.copyTemplateFile(directory, '.gitignore');
           await this.copyTemplateFile(directory, 'src/main/index.ts');
           await this.copyTemplateFile(directory, 'src/preload/preload.ts');
           await this.copyTemplateFile(directory, 'src/renderer/index.html');

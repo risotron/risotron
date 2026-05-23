@@ -14,8 +14,8 @@
     "clean": "rm -rf dist *.tsbuildinfo"
   },
   "dependencies": {
-    "@electron-forge/core": "^7.6.0",
-    "@risotron/template-vite-typescript": "*"
+    "@electron-forge/core": "^7.11.2",
+    "@risotron/template-vite-typescript": "^0.1.0"
   },
   "devDependencies": {
     "typescript": "^5.7.0"

@@ -23,8 +23,8 @@ declare global {
   }
 }
 
-setVersion('node-version', window.risotron.versions.node);
-setVersion('chrome-version', window.risotron.versions.chrome);
-setVersion('electron-version', window.risotron.versions.electron);
+setVersion('node-version', window.risotron?.versions?.node);
+setVersion('chrome-version', window.risotron?.versions?.chrome);
+setVersion('electron-version', window.risotron?.versions?.electron);
 
 console.log('👋 RisoTron renderer loaded');
