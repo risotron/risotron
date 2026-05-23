@@ -13,36 +13,203 @@ github_project:
   owner: "RisoTron"
   board_url: "https://github.com/orgs/RisoTron/projects/2"
 
-backlog: []
-  # Ordered by priority — first item = next to develop
-  # - issue: 12
-  #   type: "us"
-  #   title: "[US] As a user, I want to ..."
-  #   epic: "epic-slug"
-  #   feature: "feat-slug"
-  #   status: "ready"  # backlog | ready | in-progress | review | done
+backlog:
+  # Epic 1: Forge Foundation (P0 — foundation)
+  - issue: 14
+    type: "us"
+    title: "[US] scaffold a new RisoTron app in one command in <60s"
+    epic: "forge-foundation"
+    feature: "base-app-shell"
+    status: "backlog"
+  - issue: 15
+    type: "us"
+    title: "[US] npm run make produces distributable for current OS"
+    epic: "forge-foundation"
+    feature: "base-app-shell"
+    status: "backlog"
+  - issue: 16
+    type: "us"
+    title: "[US] read UPSTREAM.md to know tracked Forge version"
+    epic: "forge-foundation"
+    feature: "upstream-sync"
+    status: "backlog"
+  - issue: 17
+    type: "us"
+    title: "[US] bumping electron-forge in package.json = upstream sync"
+    epic: "forge-foundation"
+    feature: "upstream-sync"
+    status: "backlog"
+  - issue: 18
+    type: "us"
+    title: "[US] generated project structure is self-documented"
+    epic: "forge-foundation"
+    feature: "base-app-shell"
+    status: "backlog"
+  # Epic 2: Component Library Core (P0)
+  - issue: 19
+    type: "us"
+    title: "[US] createMainWindow() with secure defaults"
+    epic: "component-lib"
+    feature: "window-comp"
+    status: "backlog"
+  - issue: 20
+    type: "us"
+    title: "[US] createSplashWindow() auto-dismisses when main window ready"
+    epic: "component-lib"
+    feature: "window-comp"
+    status: "backlog"
+  - issue: 21
+    type: "us"
+    title: "[US] IPC handlers with TypeScript inference"
+    epic: "component-lib"
+    feature: "ipc-bridge"
+    status: "backlog"
+  - issue: 22
+    type: "us"
+    title: "[US] createTray() with auto-cleanup on quit"
+    epic: "component-lib"
+    feature: "system-comp"
+    status: "backlog"
+  - issue: 23
+    type: "us"
+    title: "[US] setupAutoUpdater() silent updates with typed events"
+    epic: "component-lib"
+    feature: "updater-comp"
+    status: "backlog"
+  - issue: 24
+    type: "us"
+    title: "[US] all @risotron/* packages have full TypeScript definitions"
+    epic: "component-lib"
+    feature: "window-comp"
+    status: "backlog"
+  - issue: 25
+    type: "us"
+    title: "[US] import each component as independent package"
+    epic: "component-lib"
+    feature: "window-comp"
+    status: "backlog"
+  # Epic 3: Releasable Starter Template (P0 — V1 proof)
+  - issue: 26
+    type: "us"
+    title: "[US] Studio generates runnable codebase immediately"
+    epic: "starter-template"
+    feature: "template-structure"
+    status: "backlog"
+  - issue: 27
+    type: "us"
+    title: "[US] clear folder structure: src/main, renderer, shared, components"
+    epic: "starter-template"
+    feature: "template-structure"
+    status: "backlog"
+  - issue: 28
+    type: "us"
+    title: "[US] every generated file has explanatory comments"
+    epic: "starter-template"
+    feature: "template-structure"
+    status: "backlog"
+  - issue: 29
+    type: "us"
+    title: "[US] npm run dev with hot reload"
+    epic: "starter-template"
+    feature: "template-structure"
+    status: "backlog"
+  - issue: 30
+    type: "us"
+    title: "[US] npm run make produces platform installers"
+    epic: "starter-template"
+    feature: "release-pipeline"
+    status: "backlog"
+  - issue: 31
+    type: "us"
+    title: "[US] GitHub Actions builds for macOS, Windows, Linux"
+    epic: "starter-template"
+    feature: "release-pipeline"
+    status: "backlog"
+  - issue: 32
+    type: "us"
+    title: "[US] GitHub Release tag triggers CD publish"
+    epic: "starter-template"
+    feature: "release-pipeline"
+    status: "backlog"
+  - issue: 33
+    type: "us"
+    title: "[US] app detects new version and prompts update"
+    epic: "starter-template"
+    feature: "release-pipeline"
+    status: "backlog"
+  - issue: 34
+    type: "us"
+    title: "[US] README guides clone to first release in 5 steps"
+    epic: "starter-template"
+    feature: "dev-onboarding"
+    status: "backlog"
+  - issue: 35
+    type: "us"
+    title: "[US] code signing configured or clearly documented"
+    epic: "starter-template"
+    feature: "release-pipeline"
+    status: "backlog"
 
 current_work: null
-  # issue: 12
-  # branch: "feat/epic-slug/short-desc"
-  # tasks: [20, 21, 22]
 
-epics: []
-  # - id: "auth"
-  #   title: "User Authentication"
-  #   issue: 10
-  #   status: "planned"  # planned | in-progress | done
-  #   features:
-  #     - id: "oauth-google"
-  #       title: "OAuth2 Google Login"
-  #       issue: 11
-  #       status: "planned"
+epics:
+  - id: "forge-foundation"
+    title: "Forge Foundation"
+    issue: 1
+    status: "planned"
+    features:
+      - id: "forge-plugin"
+        title: "RisoTron Forge Plugin"
+        issue: 4
+        status: "planned"
+      - id: "base-app-shell"
+        title: "Base App Shell"
+        issue: 5
+        status: "planned"
+      - id: "upstream-sync"
+        title: "Upstream Sync Strategy"
+        issue: 6
+        status: "planned"
+  - id: "component-lib"
+    title: "Component Library Core"
+    issue: 2
+    status: "planned"
+    features:
+      - id: "window-comp"
+        title: "Window Components"
+        issue: 7
+        status: "planned"
+      - id: "ipc-bridge"
+        title: "IPC Bridge"
+        issue: 8
+        status: "planned"
+      - id: "system-comp"
+        title: "System Components"
+        issue: 9
+        status: "planned"
+      - id: "updater-comp"
+        title: "AutoUpdater Component"
+        issue: 10
+        status: "planned"
+  - id: "starter-template"
+    title: "Releasable Starter Template"
+    issue: 3
+    status: "planned"
+    features:
+      - id: "template-structure"
+        title: "Template Structure"
+        issue: 11
+        status: "planned"
+      - id: "release-pipeline"
+        title: "Release Pipeline"
+        issue: 12
+        status: "planned"
+      - id: "dev-onboarding"
+        title: "Developer Onboarding"
+        issue: 13
+        status: "planned"
 
 completed: []
-  # - issue: 5
-  #   title: "[US] As a user, I want to ..."
-  #   completed_at: "2026-05-22"
-  #   epic: "epic-slug"
 
 labels_created:
   types:
@@ -56,5 +223,18 @@ labels_created:
     - "priority:high"
     - "priority:medium"
     - "priority:low"
-  epics: []
-  features: []
+  epics:
+    - "epic:forge-foundation"
+    - "epic:component-lib"
+    - "epic:starter-template"
+  features:
+    - "feat:forge-plugin"
+    - "feat:base-app-shell"
+    - "feat:upstream-sync"
+    - "feat:window-comp"
+    - "feat:ipc-bridge"
+    - "feat:system-comp"
+    - "feat:updater-comp"
+    - "feat:template-structure"
+    - "feat:release-pipeline"
+    - "feat:dev-onboarding"
