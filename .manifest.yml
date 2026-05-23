@@ -150,7 +150,10 @@ backlog:
     feature: "release-pipeline"
     status: "backlog"
 
-current_work: null
+current_work:
+  issue: 14
+  branch: "feat/forge-foundation/scaffold-cli"
+  status: "in-progress"
 
 epics:
   - id: "forge-foundation"

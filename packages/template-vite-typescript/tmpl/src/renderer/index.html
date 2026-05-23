@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'"
+    />
+    <title>RisoTron App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>⚡ RisoTron</h1>
+        <p class="tagline">Your Electron app is running!</p>
+      </header>
+
+      <main>
+        <section class="versions">
+          <div class="version-badge">
+            <span class="label">Node</span>
+            <span class="value" id="node-version">—</span>
+          </div>
+          <div class="version-badge">
+            <span class="label">Chromium</span>
+            <span class="value" id="chrome-version">—</span>
+          </div>
+          <div class="version-badge">
+            <span class="label">Electron</span>
+            <span class="value" id="electron-version">—</span>
+          </div>
+        </section>
+
+        <section class="info">
+          <p>
+            Edit <code>src/renderer/index.html</code> and the page will
+            hot-reload automatically.
+          </p>
+        </section>
+      </main>
+
+      <footer>
+        <p>
+          Built with
+          <a href="https://www.electronforge.io/" target="_blank">Electron Forge</a>
+          +
+          <a href="https://vitejs.dev/" target="_blank">Vite</a>
+        </p>
+      </footer>
+    </div>
+
+    <script type="module" src="renderer.ts"></script>
+  </body>
+</html>
