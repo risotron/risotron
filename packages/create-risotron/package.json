@@ -1,0 +1,38 @@
+{
+  "name": "create-risotron",
+  "version": "0.1.0",
+  "description": "Create a new RisoTron Electron app with one command",
+  "main": "dist/index.js",
+  "bin": {
+    "create-risotron": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist *.tsbuildinfo"
+  },
+  "dependencies": {
+    "@electron-forge/core": "^7.11.2",
+    "@risotron/template-vite-typescript": "^0.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RisoTron/RisoTron.git",
+    "directory": "packages/create-risotron"
+  },
+  "keywords": [
+    "electron",
+    "forge",
+    "risotron",
+    "scaffold",
+    "create",
+    "vite",
+    "typescript"
+  ]
+}

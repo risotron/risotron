@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@electron-forge/plugin-vite": "ELECTRON_FORGE/VERSION",
+    "vite": "^6.0.0",
+    "typescript": "~5.7.0",
+    "ts-node": "^10.9.0"
+  }
+}
