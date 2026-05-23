@@ -20,7 +20,7 @@ backlog:
     title: "[US] scaffold a new RisoTron app in one command in <60s"
     epic: "forge-foundation"
     feature: "base-app-shell"
-    status: "backlog"
+    status: "ready"
   - issue: 15
     type: "us"
     title: "[US] npm run make produces distributable for current OS"
